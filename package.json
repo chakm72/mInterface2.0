@@ -1,0 +1,22 @@
+{
+  "name": "cordova-plugin-minterface2.0",
+  "version": "1.0.0",
+  "description": "This plugin establishes the connection to the native interface and performs the requested task.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chakm72/mInterface2.0.git"
+  },
+  "keywords": [
+    "mInterface"
+  ],
+  "author": "selfservit@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chakm72/mInterface2.0/issues"
+  },
+  "homepage": "https://github.com/chakm72/mInterface2.0#readme"
+}
