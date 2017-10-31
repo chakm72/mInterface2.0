@@ -2,7 +2,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="cordova-plugin-minterface2.0"
-    version="1.0.0">
+    version="1.0.1">
     <name>mInterface2.0</name>
     <description>This plugin establishes the connection to the native interface and performs the requested task.</description>
     <author>selfservit@gmail.com</author>
@@ -33,11 +33,15 @@
 			<uses-permission android:name="android.permission.READ_PHONE_STATE" />
 		</config-file>
 		<config-file target="AndroidManifest.xml" parent="/manifest/application">
-			<service android:name="com.selfservit.util.mInterfaceService" android:label="InterfaceService" android:enabled="true"
+			<service android:name="com.selfservit.util.AuthenticationService" android:enabled="true"
             android:exported="true"/>
-			<service android:name="com.selfservit.util.mQueueService" android:label="QueueService" android:enabled="true"
+			<service android:name="com.selfservit.util.QueueService" android:enabled="true"
             android:exported="true"/>
-			<service android:name="com.selfservit.util.mLocationService" android:label="LocationService" android:enabled="true"
+			<service android:name="com.selfservit.util.LocationService" android:enabled="true"
+            android:exported="true"/>
+			<service android:name="com.selfservit.util.TimerService" android:enabled="true"
+            android:exported="true"/>
+			<service android:name="com.selfservit.util.CheckSumService" android:enabled="true"
             android:exported="true"/>
 			<receiver android:name="com.selfservit.util.mInterfaceReceiver" android:enabled="true"
             android:exported="true">
@@ -47,12 +51,14 @@
 				</intent-filter>  
 			</receiver>
 		</config-file>
-		<source-file src="src/android/mInterfaceService.java" target-dir="src/com/selfservit/util/" />
-		<source-file src="src/android/mQueueService.java" target-dir="src/com/selfservit/util/" />
-		<source-file src="src/android/mLocationService.java" target-dir="src/com/selfservit/util/" />
+		<source-file src="src/android/AuthenticationService.java" target-dir="src/com/selfservit/util/" />
+		<source-file src="src/android/QueueService.java" target-dir="src/com/selfservit/util/" />
+		<source-file src="src/android/LocationService.java" target-dir="src/com/selfservit/util/" />
+		<source-file src="src/android/TimerService.java" target-dir="src/com/selfservit/util/" />
+		<source-file src="src/android/CheckSumService.java" target-dir="src/com/selfservit/util/" />
 		<source-file src="src/android/mInterfaceReceiver.java" target-dir="src/com/selfservit/util/" />
 		<source-file src="src/android/mInterface.java" target-dir="src/com/selfservit/util/" />
-	    	<source-file src="src/android/mInterfaceUtil.java" target-dir="src/com/selfservit/util/" />
+	    <source-file src="src/android/mInterfaceUtil.java" target-dir="src/com/selfservit/util/" />
     </platform>
 	<platform name="ios">
 		<config-file target="*-Info.plist" parent="UIBackgroundModes">
