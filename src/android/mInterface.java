@@ -31,29 +31,41 @@ public class mInterface extends CordovaPlugin {
 	 @ Override
 	public void onResume(boolean multitasking) {
 		super.onResume(multitasking);
-		 if (!isServiceRunning(mInterfaceService.class) || !isProcessRunning()) {
-			 cordova.getActivity().startService(new Intent(cordova.getActivity().getApplicationContext(), mInterfaceService.class));
+		 if (!isServiceRunning(AuthenticationService.class) || !isProcessRunning()) {
+			 cordova.getActivity().startService(new Intent(cordova.getActivity().getApplicationContext(), AuthenticationService.class));
 		 }
-		 if (!isServiceRunning(mQueueService.class) || !isProcessRunning()) {
-			 cordova.getActivity().startService(new Intent(cordova.getActivity().getApplicationContext(), mQueueService.class));
+		 if (!isServiceRunning(QueueService.class) || !isProcessRunning()) {
+			 cordova.getActivity().startService(new Intent(cordova.getActivity().getApplicationContext(), QueueService.class));
 		 }
-		 if (!isServiceRunning(mLocationService.class) || !isProcessRunning()) {
-			 cordova.getActivity().startService(new Intent(cordova.getActivity().getApplicationContext(), mLocationService.class));
+		 if (!isServiceRunning(LocationService.class) || !isProcessRunning()) {
+			 cordova.getActivity().startService(new Intent(cordova.getActivity().getApplicationContext(), LocationService.class));
+		 }
+		 if (!isServiceRunning(TimerService.class) || !isProcessRunning()) {
+			 cordova.getActivity().startService(new Intent(cordova.getActivity().getApplicationContext(), TimerService.class));
+		 }
+		 if (!isServiceRunning(CheckSumService.class) || !isProcessRunning()) {
+			 cordova.getActivity().startService(new Intent(cordova.getActivity().getApplicationContext(), CheckSumService.class));
 		 }
 	}
 	 @ Override
 	public boolean execute(final String action, JSONArray args, final CallbackContext callbackContext)throws JSONException {
 		/* START BACKGROUND SERVICE IF NOT RUNNING ALREADY */
 		if (action.equals("StartService")) {
-			if (!isServiceRunning(mInterfaceService.class) || !isProcessRunning()) {
-				cordova.getActivity().startService(new Intent(cordova.getActivity().getApplicationContext(), mInterfaceService.class));
-			}
-			if (!isServiceRunning(mQueueService.class) || !isProcessRunning()) {
-				cordova.getActivity().startService(new Intent(cordova.getActivity().getApplicationContext(), mQueueService.class));
-			}
-			if (!isServiceRunning(mLocationService.class) || !isProcessRunning()) {
-				cordova.getActivity().startService(new Intent(cordova.getActivity().getApplicationContext(), mLocationService.class));
-			}
+			if (!isServiceRunning(AuthenticationService.class) || !isProcessRunning()) {
+			 cordova.getActivity().startService(new Intent(cordova.getActivity().getApplicationContext(), AuthenticationService.class));
+		 }
+		 if (!isServiceRunning(QueueService.class) || !isProcessRunning()) {
+			 cordova.getActivity().startService(new Intent(cordova.getActivity().getApplicationContext(), QueueService.class));
+		 }
+		 if (!isServiceRunning(LocationService.class) || !isProcessRunning()) {
+			 cordova.getActivity().startService(new Intent(cordova.getActivity().getApplicationContext(), LocationService.class));
+		 }
+		 if (!isServiceRunning(TimerService.class) || !isProcessRunning()) {
+			 cordova.getActivity().startService(new Intent(cordova.getActivity().getApplicationContext(), TimerService.class));
+		 }
+		 if (!isServiceRunning(CheckSumService.class) || !isProcessRunning()) {
+			 cordova.getActivity().startService(new Intent(cordova.getActivity().getApplicationContext(), CheckSumService.class));
+		 }
 			callbackContext.success("Success");
 		} else if (action.equals("GetLocation")) {
 			/* SEND CURRENT LOCATION VIA PLUGIN CALLBACK */
