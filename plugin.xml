@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="cordova-plugin-minterface2.0"
+    version="1.0.0">
+    <name>mInterface2.0</name>
+    <description>This plugin establishes the connection to the native interface and performs the requested task.</description>
+    <author>selfservit@gmail.com</author>
+    <keywords>mInterface</keywords>
+    <license>Apache 2.0 License</license>
+    <repo></repo>
+    <issue></issue>
+	<asset src="www/mInterface.js" target="js/mInterface.js"/>
+	<js-module src="www/mInterface.js" name="mInterface">
+        <clobbers target="mInterface" />
+		</js-module>
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="mInterface" >
+                <param name="android-package" value="com.selfservit.util.mInterface"/>
+            </feature>
+        </config-file>
+		<config-file target="AndroidManifest.xml" parent="/manifest">
+			<uses-permission android:name="android.permission.INTERNET" />
+			<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+			<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+			<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+			<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+			<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+			<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+			<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+		</config-file>
+		<config-file target="AndroidManifest.xml" parent="/manifest/application">
+			<service android:name="com.selfservit.util.mInterfaceService" android:label="InterfaceService" android:enabled="true"
+            android:exported="true"/>
+			<service android:name="com.selfservit.util.mQueueService" android:label="QueueService" android:enabled="true"
+            android:exported="true"/>
+			<service android:name="com.selfservit.util.mLocationService" android:label="LocationService" android:enabled="true"
+            android:exported="true"/>
+			<receiver android:name="com.selfservit.util.mInterfaceReceiver" android:enabled="true"
+            android:exported="true">
+				<intent-filter>     
+					<action android:name="android.intent.action.BOOT_COMPLETED"/>
+					<action android:name="com.example.checkservice" />
+				</intent-filter>  
+			</receiver>
+		</config-file>
+		<source-file src="src/android/mInterfaceService.java" target-dir="src/com/selfservit/util/" />
+		<source-file src="src/android/mQueueService.java" target-dir="src/com/selfservit/util/" />
+		<source-file src="src/android/mLocationService.java" target-dir="src/com/selfservit/util/" />
+		<source-file src="src/android/mInterfaceReceiver.java" target-dir="src/com/selfservit/util/" />
+		<source-file src="src/android/mInterface.java" target-dir="src/com/selfservit/util/" />
+	    	<source-file src="src/android/mInterfaceUtil.java" target-dir="src/com/selfservit/util/" />
+    </platform>
+	<platform name="ios">
+		<config-file target="*-Info.plist" parent="UIBackgroundModes">
+            		<array>
+                		<string>location</string>
+            		</array>
+        	</config-file>
+		<config-file target="*-Info.plist" parent="UIRequiredDeviceCapabilities">
+            		<array>
+                		<string>location-services</string>
+            		</array>
+        	</config-file>
+		
+		<config-file target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
+            		<string>LOCATION_ALWAYS_USAGE_DESCRIPTION</string>
+        	</config-file>
+		
+		<config-file target="*-Info.plist" parent="NSCameraUsageDescription">
+             		<string>CAMERA_USAGE_DESCRIPTION</string>
+         	</config-file>
+		
+         	<config-file target="*-Info.plist" parent="NSPhotoLibraryUsageDescription">
+             		<string>PHOTOLIBRARY_USAGE_DESCRIPTION</string>
+         	</config-file>
+		
+		<config-file target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
+            		<string>LOCATION_WHEN_IN_USE_USAGE_DESCRIPTION</string>
+        	</config-file>
+		<preference name="CAMERA_USAGE_DESCRIPTION" default="Allow use camera from your device" />
+		<preference name="PHOTOLIBRARY_USAGE_DESCRIPTION" default="Allow access your photos from gallery" />
+		<preference name="BACKGROUND_MODE_LOCATION" default="&lt;string&gt;location&lt;/string&gt;" />
+		<preference name="LOCATION_ALWAYS_USAGE_DESCRIPTION" default="Background location-tracking is required" />
+		<preference name="LOCATION_WHEN_IN_USE_USAGE_DESCRIPTION" default="Background location-tracking is required" />
+		<config-file target="config.xml" parent="/widget">
+			<feature name="mInterface">
+				<param name="ios-package" value="HWPHello" />
+			</feature>
+		</config-file>
+		<header-file src="src/ios/HWPHello.h"/>
+		<source-file src="src/ios/HWPHello.m"/>
+		<header-file src="src/ios/InternetConnection.h"/>
+		<source-file src="src/ios/InternetConnection.m"/>
+		<header-file src="src/ios/XMLConverter.h"/>
+		<source-file src="src/ios/XMLConverter.m"/>
+		<framework src="CoreLocation.framework" />
+		<framework src="MapKit.framework" />
+		<framework src="Foundation.framework" />
+		<framework src="SystemConfiguration.framework" />
+		<framework src="CoreFoundation.framework" />
+	   	<framework src="CoreTelephony.framework" />
+		<framework src="UIKit.framework" />
+		<framework src="CFNetwork.framework" />
+		<framework src="AssetsLibrary.framework" />
+		<framework src="AVFoundation.framework" />
+	</platform>
+</plugin>
