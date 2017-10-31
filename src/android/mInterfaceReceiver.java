@@ -13,16 +13,20 @@ public class mInterfaceReceiver extends BroadcastReceiver {
     @ Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equalsIgnoreCase(Intent.ACTION_BOOT_COMPLETED)) {
-            Intent serviceIntent = new Intent(context, mInterfaceService.class);
+            Intent serviceIntent = new Intent(context, AuthenticationService.class);
             context.startService(serviceIntent);
-            Intent queueIntent = new Intent(context, mQueueService.class);
+            Intent queueIntent = new Intent(context, QueueService.class);
             context.startService(queueIntent);
-            Intent LocationIntent = new Intent(context, mLocationService.class);
+            Intent LocationIntent = new Intent(context, LocationService.class);
             context.startService(LocationIntent);
+            Intent timerIntent = new Intent(context, TimerService.class);
+            context.startService(timerIntent);
+            Intent checkSumIntent = new Intent(context, CheckSumService.class);
+            context.startService(checkSumIntent);
         }
         if (intent.getAction().equalsIgnoreCase("com.example.checkservice")) {
             if (!isServiceRunning(context) || !isProcessRunning(context)) {
-                Intent queueIntent = new Intent(context, mQueueService.class);
+                Intent queueIntent = new Intent(context, QueueService.class);
                 context.startService(queueIntent);
             }
         }
@@ -30,7 +34,7 @@ public class mInterfaceReceiver extends BroadcastReceiver {
     private boolean isServiceRunning(Context context) {
         ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-            if (mInterfaceService.class.getName().equals(service.service.getClassName())) {
+            if (QueueService.class.getName().equals(service.service.getClassName())) {
                 return true;
             }
         }
